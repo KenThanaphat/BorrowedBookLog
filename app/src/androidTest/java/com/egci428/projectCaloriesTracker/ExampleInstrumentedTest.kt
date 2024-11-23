@@ -1,4 +1,4 @@
-package com.egci428.ProjectCaloriesTracker
+package com.egci428.projectCaloriesTracker
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

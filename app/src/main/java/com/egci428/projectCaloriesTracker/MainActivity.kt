@@ -1,4 +1,4 @@
-package com.egci428.ProjectCaloriesTracker
+package com.egci428.projectCaloriesTracker
 
 import android.os.Bundle
 import android.widget.Button

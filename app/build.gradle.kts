@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.egci428.caloriestracker"
+    namespace = "com.egci428.projectCaloriesTracker"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.egci428.caloriestracker"
+        applicationId = "com.egci428.projectCaloriesTracker"
         minSdk = 34
         targetSdk = 34
         versionCode = 1
