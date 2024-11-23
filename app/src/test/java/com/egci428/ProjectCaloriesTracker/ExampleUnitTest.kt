@@ -1,4 +1,4 @@
-package com.egci428.caloriestracker
+package com.egci428.ProjectCaloriesTracker
 
 import org.junit.Test
 
