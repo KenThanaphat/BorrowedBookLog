@@ -1,4 +1,4 @@
-package com.egci428.projectCaloriesTracker
+package com.egci428.borrowedBooksLog
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

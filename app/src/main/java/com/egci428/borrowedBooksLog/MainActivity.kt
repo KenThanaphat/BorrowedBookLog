@@ -1,7 +1,8 @@
-package com.egci428.projectCaloriesTracker
+package com.egci428.borrowedBooksLog
 
 import android.os.Bundle
 import android.widget.Button
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -17,5 +18,11 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        var button = findViewById<Button>(R.id.button)
+
+        button.setOnClickListener{
+            Toast.makeText(this, "Activated", Toast.LENGTH_SHORT).show()
+        }
+
     }
 }

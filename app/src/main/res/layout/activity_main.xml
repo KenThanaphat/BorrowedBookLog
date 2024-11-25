@@ -215,6 +215,7 @@
             android:layout_marginBottom="8dp"
             android:fontFamily="@font/adlam_display"
             android:text="Hall Of Books"
+            android:textColor="#000000"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/listView"

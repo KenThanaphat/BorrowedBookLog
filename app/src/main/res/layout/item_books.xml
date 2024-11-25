@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/Foo"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="110dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/rectangle"
+        android:backgroundTint="#ABE38C4C"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/Image"
+            android:layout_width="81dp"
+            android:layout_height="78dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/returnDate"
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="9dp"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/adlam_display"
+            android:text="Return : 11/25/2024"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/Image"
+            tools:layout_editor_absoluteY="46dp" />
+
+        <TextView
+            android:id="@+id/borrowDate"
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="9dp"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/adlam_display"
+            android:text="Borrowed: 11/25/2024"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/Image"
+            tools:layout_editor_absoluteY="66dp" />
+
+        <TextView
+            android:id="@+id/bookName"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="9dp"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/adlam_display"
+            android:text="Book Title : "
+            android:textColor="#000000"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/Image"
+            tools:layout_editor_absoluteY="16dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,4 +1,4 @@
-package com.egci428.projectCaloriesTracker
+package com.egci428.borrowedBooksLog
 
 import org.junit.Test
 
