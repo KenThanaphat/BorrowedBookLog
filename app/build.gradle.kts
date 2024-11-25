@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.egci428.projectCaloriesTracker"
+    namespace = "com.egci428.borrowedBooksLog"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.egci428.projectCaloriesTracker"
+        applicationId = "com.egci428.borrowedBooksLog"
         minSdk = 34
         targetSdk = 34
         versionCode = 1
