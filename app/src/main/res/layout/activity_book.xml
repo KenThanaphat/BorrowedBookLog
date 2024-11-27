@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -26,7 +27,7 @@
             android:layout_marginTop="32dp"
             android:layout_marginEnd="16dp"
             android:ems="10"
-            android:hint="Return Date"
+            android:hint="Return Date (dd-mm-yy)"
             android:inputType="text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -54,7 +55,7 @@
             android:layout_marginTop="32dp"
             android:layout_marginEnd="16dp"
             android:ems="10"
-            android:hint="Borrow Date"
+            android:hint="Borrow Date (dd-mm-yy)"
             android:inputType="text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -115,6 +116,7 @@
         android:foregroundTint="#836953"
         android:gravity="center"
         android:includeFontPadding="true"
+        android:onClick="takePhoto"
         android:outlineSpotShadowColor="#836953"
         android:paddingLeft="0dp"
         android:paddingRight="0dp"
@@ -128,6 +130,28 @@
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
         app:rippleColor="#836953"
         app:strokeColor="#836953" />
+
+    <ImageView
+        android:id="@+id/BookImageview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cameraBtn"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="62dp"
+        android:text="Save books"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/cameraBtn"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

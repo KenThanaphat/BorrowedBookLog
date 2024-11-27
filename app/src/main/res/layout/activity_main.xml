@@ -196,12 +196,12 @@
         app:layout_constraintTop_toBottomOf="@+id/rentLayout">
 
         <ListView
-            android:id="@+id/listView"
+            android:id="@+id/bookView"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="35dp"
-            android:layout_marginEnd="24dp"
+            android:layout_marginEnd="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -218,7 +218,7 @@
             android:textColor="#000000"
             android:textSize="20sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/listView"
+            app:layout_constraintBottom_toTopOf="@+id/bookView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
