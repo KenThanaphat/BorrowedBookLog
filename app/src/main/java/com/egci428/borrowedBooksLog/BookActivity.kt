@@ -1,5 +1,6 @@
 package com.egci428.borrowedBooksLog
 
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Bitmap
@@ -7,6 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.DatePicker
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
@@ -17,17 +19,28 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.firestore.FirebaseFirestore
+import org.w3c.dom.Text
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 import java.util.UUID
 
 class BookActivity : AppCompatActivity() {
 
     lateinit var userUUID: String
     lateinit var bookname: EditText
-    lateinit var borrowdate: EditText
-    lateinit var returndate: EditText
+    lateinit var borrowdate: TextView
+
+    lateinit var setborrowdate: Button
+    lateinit var setreturndate: Button
+    lateinit var returndate: TextView
     lateinit var cameraBtn: Button
     lateinit var saveResult: Button
 
+    private var borrowstring = ""
+    private var returnstring = ""
+
+    private val calendar = Calendar.getInstance()
 
     lateinit var bookImageView: ImageView
     lateinit var dataReference: FirebaseFirestore
@@ -44,8 +57,11 @@ class BookActivity : AppCompatActivity() {
         }
 
         bookname = findViewById(R.id.bookname)
-        borrowdate = findViewById(R.id.borrowdate)
-        returndate = findViewById(R.id.returndate)
+        borrowdate = findViewById(R.id.borrowtext)
+        setborrowdate = findViewById(R.id.SetBorrowDate)
+        setreturndate = findViewById(R.id.setReturnDate)
+
+        returndate = findViewById(R.id.returntext)
         cameraBtn = findViewById(R.id.cameraBtn)
         bookImageView = findViewById(R.id.BookImageview)
         saveResult = findViewById(R.id.saveButton)
@@ -64,6 +80,13 @@ class BookActivity : AppCompatActivity() {
             submitData()
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
+        }
+
+        setborrowdate.setOnClickListener{
+            openDialog(0)
+        }
+        setreturndate.setOnClickListener{
+            openDialog(1)
         }
 
 
@@ -120,19 +143,37 @@ class BookActivity : AppCompatActivity() {
     private fun submitData() {
         val book = bookname.text.toString()
         if (book.isEmpty()) {
-            bookname.error = "Please submit a message"
+            bookname.error = "Please submit a name"
             return
         }
 
         val userCollection = dataReference.collection("users").document(userUUID).collection("dataMessage")
         val bookId = userCollection.document().id
-        val bookData = Books(bookId, book, borrowdate.text.toString(), returndate.text.toString(),filePath)
+        val bookData = Books(bookId, book, borrowstring, returnstring ,filePath)
 
-        userCollection.add(bookData).addOnSuccessListener {
-            Toast.makeText(applicationContext, "Message saved successfully", Toast.LENGTH_SHORT).show()
-        }.addOnFailureListener {
-            Toast.makeText(applicationContext, "Failed to save message", Toast.LENGTH_SHORT).show()
-        }
+        userCollection.document(bookId).set(bookData)
+    }
+
+    fun openDialog(choice : Int){
+        var dialog = DatePickerDialog(this, {DatePicker, year: Int,monthOfYear: Int, dayOfMonth: Int ->
+            val selectedData = Calendar.getInstance()
+            selectedData.set(year,monthOfYear,dayOfMonth)
+            val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+            val formattedDate = dateFormat.format(selectedData.time)
+            if(choice == 0) {
+                borrowdate.setText("Borrow Date: " + formattedDate)
+                borrowstring = formattedDate
+            }
+            if(choice == 1){
+                returndate.setText("Return Date: "+ formattedDate)
+                returnstring = formattedDate
+            }
+        },
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)
+        )
+        dialog.show()
     }
 
 }

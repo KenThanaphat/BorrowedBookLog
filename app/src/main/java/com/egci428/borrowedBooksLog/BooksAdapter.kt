@@ -26,8 +26,8 @@ class BooksAdapter(val mContext : Context, val layoutResID: Int, val bookList : 
 
         booksImage.setImageBitmap(imageres)
         BookName.text = book.bookName
-        returnDate.text = book.returnTime
-        borrowDate.text = book.timeBorrowed
+        returnDate.text = "Return Date: "+ book.returnTime
+        borrowDate.text = "Borrow Date: "+book.timeBorrowed
 
         return view
 

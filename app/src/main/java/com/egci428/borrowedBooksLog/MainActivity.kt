@@ -3,6 +3,8 @@ package com.egci428.borrowedBooksLog
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.view.GestureDetector
+import android.view.MotionEvent
 import android.widget.Button
 import android.widget.ListView
 import android.widget.Toast
@@ -10,8 +12,10 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import java.util.UUID
+
 
 class MainActivity : AppCompatActivity() {
     lateinit var userUUID : String
@@ -39,6 +43,13 @@ class MainActivity : AppCompatActivity() {
         dataReference = FirebaseFirestore.getInstance()
         bookList = mutableListOf()
         readFirestoreData()
+
+        val gestureDetector = GestureDetector(this, GestureListener() )
+
+        bookView.setOnTouchListener { _, event ->
+            gestureDetector!!.onTouchEvent(event)
+            false
+        }
 
         button.setOnClickListener{
             val intent = Intent(this, BookActivity::class.java)
@@ -75,6 +86,56 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(applicationContext, "Failed to read messages", Toast.LENGTH_SHORT).show()
             }
     }
+
+    private inner class GestureListener : GestureDetector.SimpleOnGestureListener() {
+
+        private val MAX_SWIPE_DISTANCE_X = 100
+        private val MAX_VELOCITY = 100
+
+        //private val MIN_SWIPE_DISTANCE_Y = 100
+        //private val MAX_SWIPE_DISTANCE_Y = 100
+
+        override fun onFling(
+            e1: MotionEvent?,
+            e2: MotionEvent,
+            velocityX: Float,
+            velocityY: Float
+        ): Boolean {
+            if (e1 == null || e2 == null) return false
+
+            val deltaX = e2.x - e1.x
+            if (Math.abs(deltaX) > MAX_SWIPE_DISTANCE_X && Math.abs(velocityX) > MAX_VELOCITY) {
+                val position = findItemPositionByCoordinates(e1)
+                position?.let {
+                    val view = bookView.getChildAt(it - bookView.firstVisiblePosition)
+                    view?.animate()
+                        ?.alpha(0f)
+                        ?.setDuration(300)
+                        ?.withEndAction {
+                            val bookref = dataReference.collection("users").document(userUUID).collection("dataMessage").document(bookList[it].bookId)
+
+                            bookref.delete()
+                            bookList.removeAt(it)
+
+                            adapter.notifyDataSetChanged()
+
+                            view.alpha = 1f
+                        }
+                        ?.start()
+                }
+                return true
+            }
+            return false
+        }
+
+
+    }
+
+    private fun findItemPositionByCoordinates(e: MotionEvent): Int? {
+        val position = bookView.pointToPosition(e.x.toInt(), e.y.toInt())
+        return if (position != ListView.INVALID_POSITION) position else null
+    }
+
 
 
 }
