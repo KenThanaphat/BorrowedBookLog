@@ -8,6 +8,7 @@
     android:backgroundTint="#BA9C9C">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/submitLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
@@ -20,7 +21,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+        app:layout_constraintTop_toBottomOf="@+id/detailLayout">
 
         <Button
             android:id="@+id/saveButton"
@@ -34,10 +35,48 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/cameraBtn"
+            android:layout_width="120dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="36dp"
+            android:layout_marginBottom="58dp"
+            android:backgroundTint="#80B9DC"
+            android:foregroundTint="#836953"
+            android:gravity="center"
+            android:includeFontPadding="true"
+            android:onClick="takePhoto"
+            android:outlineSpotShadowColor="#836953"
+            android:paddingLeft="0dp"
+            android:paddingRight="0dp"
+            android:text=""
+            app:icon="@android:drawable/ic_menu_camera"
+            app:iconGravity="textStart"
+            app:iconSize="60dp"
+            app:iconTint="#000000"
+            app:layout_constraintBottom_toTopOf="@+id/saveButton"
+            app:layout_constraintEnd_toStartOf="@+id/BookImageview"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:rippleColor="#836953"
+            app:strokeColor="#836953" />
+
+        <ImageView
+            android:id="@+id/BookImageview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="40dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout2"
+        android:id="@+id/detailLayout"
         android:layout_width="369dp"
         android:layout_height="300dp"
         android:layout_marginStart="20dp"
@@ -127,7 +166,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
+        android:id="@+id/rentalLayout"
         android:layout_width="140dp"
         android:layout_height="80dp"
         android:layout_marginStart="24dp"
@@ -170,38 +209,18 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
-        android:id="@+id/cameraBtn"
-        android:layout_width="120dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="44dp"
-        android:backgroundTint="#80B9DC"
-        android:foregroundTint="#836953"
-        android:gravity="center"
-        android:includeFontPadding="true"
-        android:onClick="takePhoto"
-        android:outlineSpotShadowColor="#836953"
-        android:paddingLeft="0dp"
-        android:paddingRight="0dp"
-        android:text=""
-        app:icon="@android:drawable/ic_menu_camera"
-        app:iconGravity="textStart"
-        app:iconSize="60dp"
-        app:iconTint="#000000"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
-        app:rippleColor="#836953"
-        app:strokeColor="#836953" />
-
-    <ImageView
-        android:id="@+id/BookImageview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="60dp"
+        android:id="@+id/exitBtn"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:backgroundTint="#C8708D"
+        android:fontFamily="@font/alfa_slab_one"
+        android:text="X"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
