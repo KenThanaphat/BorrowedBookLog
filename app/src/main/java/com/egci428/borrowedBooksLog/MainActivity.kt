@@ -1,5 +1,6 @@
 package com.egci428.borrowedBooksLog
 
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -12,6 +13,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.work.*
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import java.util.UUID
@@ -24,6 +26,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var bookList: MutableList<Books>
 
     lateinit var bookView: ListView
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,10 +58,11 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, BookActivity::class.java)
             intent.putExtra("uuid",userUUID)
             startActivity(intent)
-            Toast.makeText(this, "Activated", Toast.LENGTH_SHORT).show()
         }
 
 
+        scheduleReturnReminderWorker(this, userUUID)
+        NotificationHelper.createNotificationChannel(this)
 
     }
 
@@ -134,6 +138,27 @@ class MainActivity : AppCompatActivity() {
     private fun findItemPositionByCoordinates(e: MotionEvent): Int? {
         val position = bookView.pointToPosition(e.x.toInt(), e.y.toInt())
         return if (position != ListView.INVALID_POSITION) position else null
+    }
+
+    fun scheduleReturnReminderWorker(context: Context, userUUID: String) {
+        val workManager = WorkManager.getInstance(context)
+
+        val inputData = Data.Builder()
+            .putString("userUUID", userUUID)
+            .build()
+
+        val workRequest = PeriodicWorkRequestBuilder<ReturnReminderWorker>(
+            1, // Repeat interval
+            java.util.concurrent.TimeUnit.DAYS
+        )
+            .setInputData(inputData)
+            .build()
+
+        workManager.enqueueUniquePeriodicWork(
+            "ReturnReminderWorker",
+            ExistingPeriodicWorkPolicy.REPLACE,
+            workRequest
+        )
     }
 
 

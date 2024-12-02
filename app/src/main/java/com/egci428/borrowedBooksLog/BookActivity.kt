@@ -41,6 +41,7 @@ class BookActivity : AppCompatActivity(), SensorEventListener {
     lateinit var returndate: TextView
     lateinit var cameraBtn: Button
     lateinit var saveResult: Button
+    lateinit var exitButton: Button
 
     private var borrowstring = ""
     private var returnstring = ""
@@ -68,6 +69,7 @@ class BookActivity : AppCompatActivity(), SensorEventListener {
         borrowdate = findViewById(R.id.borrowtext)
         setborrowdate = findViewById(R.id.SetBorrowDate)
         setreturndate = findViewById(R.id.setReturnDate)
+        exitButton = findViewById(R.id.exitBtn)
 
         returndate = findViewById(R.id.returntext)
         cameraBtn = findViewById(R.id.cameraBtn)
@@ -96,6 +98,10 @@ class BookActivity : AppCompatActivity(), SensorEventListener {
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
             }
+        }
+
+        exitButton.setOnClickListener(){
+            finish()
         }
 
         setborrowdate.setOnClickListener{
@@ -135,7 +141,7 @@ class BookActivity : AppCompatActivity(), SensorEventListener {
             // Optionally, display it in the ImageView
             bookImageView.setImageBitmap(it)
 
-            Toast.makeText(this, "Image saved to: $filePath", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Image saved", Toast.LENGTH_LONG).show()
         } ?: run {
             Log.e("Take Picture", "Bitmap is null")
         }
