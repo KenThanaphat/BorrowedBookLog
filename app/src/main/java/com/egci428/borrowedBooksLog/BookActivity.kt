@@ -88,9 +88,14 @@ class BookActivity : AppCompatActivity(), SensorEventListener {
         }
 
         saveResult.setOnClickListener{
-            submitData()
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            if(bookImageView.drawable == null || bookname.text.isEmpty() || borrowstring=="" || returnstring=="" || bookImageView.isSelected) {
+                Toast.makeText(this,"Please enter all the book information",Toast.LENGTH_LONG).show()
+            }
+            else{
+                submitData()
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+            }
         }
 
         setborrowdate.setOnClickListener{
