@@ -3,6 +3,7 @@ package com.egci428.borrowedBooksLog
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.os.Build
 import android.os.Bundle
 import android.view.GestureDetector
 import android.view.MotionEvent
@@ -10,6 +11,7 @@ import android.widget.Button
 import android.widget.ListView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -17,6 +19,7 @@ import androidx.work.*
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import java.util.UUID
+import android.Manifest
 
 
 class MainActivity : AppCompatActivity() {
@@ -26,6 +29,16 @@ class MainActivity : AppCompatActivity() {
     lateinit var bookList: MutableList<Books>
 
     lateinit var bookView: ListView
+
+    private val requestPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted: Boolean ->
+        if (isGranted) {
+            // Permission granted, proceed with notification setup
+        } else {
+            // Permission denied, handle accordingly
+        }
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,6 +51,10 @@ class MainActivity : AppCompatActivity() {
             insets
         }
         var button = findViewById<Button>(R.id.button)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+        }
 
         val sharedPreferences: SharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
         userUUID = sharedPreferences.getString("UUID", null) ?: generateAndSaveUUID(sharedPreferences)

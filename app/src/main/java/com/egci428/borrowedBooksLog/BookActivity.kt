@@ -199,13 +199,13 @@ class BookActivity : AppCompatActivity(), SensorEventListener {
     }
 
     private fun resetData() {
-        bookname.text.clear() // Clears the text in the EditText
-        borrowdate.text = "Borrow Date:" // Resets the TextView to its default value
-        returndate.text = "Return Date:" // Resets the TextView to its default value
+        //bookname.text.clear() // Clears the text in the EditText
+        //borrowdate.text = "Borrow Date:" // Resets the TextView to its default value
+        //returndate.text = "Return Date:" // Resets the TextView to its default value
         bookImageView.setImageResource(0) // Clears the image
         filePath = "" // Resets the file path
-        borrowstring = "" // Resets the borrow string
-        returnstring = "" // Resets the return string
+        //borrowstring = "" // Resets the borrow string
+        //returnstring = "" // Resets the return string
 
         Toast.makeText(this, "Data has been reset", Toast.LENGTH_SHORT).show()
     }
