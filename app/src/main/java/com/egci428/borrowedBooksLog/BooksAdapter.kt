@@ -1,8 +1,10 @@
 package com.egci428.borrowedBooksLog
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.icu.text.SimpleDateFormat
 import android.icu.util.Calendar
 import android.util.Log
@@ -20,6 +22,9 @@ class BooksAdapter(val mContext : Context, val layoutResID: Int, val bookList : 
         val book = bookList[position]
         val layoutInflater = LayoutInflater.from(mContext)
         val view = layoutInflater.inflate(layoutResID, null)
+
+        val items_layout = view.findViewById<View>(R.id.itemsLayout)
+
         val BookName = view.findViewById<TextView>(R.id.bookName)
         val returnDate = view.findViewById<TextView>(R.id.returnDate)
         val borrowDate = view.findViewById<TextView>(R.id.borrowDate)
@@ -39,6 +44,12 @@ class BooksAdapter(val mContext : Context, val layoutResID: Int, val bookList : 
         } else {
             "Overdue!"
         }
+
+        val overdueTint = ColorStateList.valueOf(Color.parseColor("#FF746C"))
+        val normalTint = ColorStateList.valueOf(Color.parseColor("#ABE38C4C"))
+
+        // Set background tint
+        items_layout.backgroundTintList = if (daysLeft < 0) overdueTint else normalTint
 
         return view
 

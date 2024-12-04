@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout3"
+        android:id="@+id/itemsLayout"
         android:layout_width="0dp"
         android:layout_height="130dp"
         android:layout_marginStart="8dp"
